@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertising - Services</title>
+    
+    <!-- Load Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Load Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJz96wJ+C0R/hV+LwXzT2qT52t0fA/VfA/GZ0QJ0YQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Define a cinematic color palette with material influence */
+        :root {
+            --color-primary: #1a1a2e; /* Deep Navy/Black */
+            --color-secondary: #e94560; /* Rich Cinematic Red/Pink */
+            --color-accent: #ffd166; /* Bright Gold Accent */
+            --color-text: #f4f4f4; /* Light Text (White) */
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Set base styles for a dark, cinematic theme */
+        body {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Material Navbar */
+        .navbar {
+            background-color: var(--color-primary) !important;
+            border-bottom: 2px solid var(--color-secondary);
+        }
+        .navbar-icon {
+            color: var(--color-text) !important; 
+            transition: color 0.3s ease;
+        }
+        .navbar-icon:hover {
+            color: var(--color-secondary) !important; /* Hover effect remains secondary red/pink */
+        }
+        .nav-link, .navbar-brand {
+            color: var(--color-text) !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--color-secondary) !important;
+        }
+        .btn-cta {
+            background-color: var(--color-secondary);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        .btn-cta:hover {
+            background-color: #d83d53; 
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section - Base Desktop Styles */
+        .hero-section {
+            position: relative; /* Needed for absolute positioning of background animation */
+            padding: 100px 0 80px;
+            background-image: linear-gradient(135deg, var(--color-primary) 0%, #301934 100%);
+            border-bottom: 5px solid var(--color-accent);
+            overflow: hidden; /* Hide overflowing animation particles */
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative; /* Ensure text is above animation */
+            z-index: 2;
+        }
+        .hero-section .lead, .hero-section .btn {
+            position: relative; /* Ensure these are above animation */
+            z-index: 2;
+        }
+        
+        /* --- Background Chemical Bond Animation --- */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1; /* Behind text, above actual hero background */
+            pointer-events: none; /* Make it non-interactive */
+        }
+
+        .background-animation::before,
+        .background-animation::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.05); /* Very low opacity white */
+            border-radius: 50%;
+            animation-duration: 30s; /* Slower animation */
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        /* Define the "dots" */
+        .background-animation::before {
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.08); /* Subtle glow */
+            animation-name: fade-in-out, move-x, move-y;
+            animation-delay: 0s, 0s, 5s; /* Stagger animations */
+            top: 20%;
+            left: 10%;
+        }
+
+        /* Define the "lines" (larger, more elongated) */
+        .background-animation::after {
+            width: 3px;
+            height: 80px; /* More like a bond line */
+            border-radius: 3px;
+            background-color: rgba(255, 255, 255, 0.03); /* Even lower opacity for lines */
+            transform: rotate(45deg); /* Angle the lines */
+            animation-name: fade-in-out, move-x-alt, move-y-alt;
+            animation-delay: 10s, 10s, 0s; /* Stagger animations */
+            top: 50%;
+            left: 80%;
+        }
+
+        /* Create multiple instances with different positions and delays */
+        .background-animation:nth-child(2)::before { top: 70%; left: 30%; animation-delay: 5s, 5s, 0s; }
+        .background-animation:nth-child(2)::after { top: 10%; left: 50%; animation-delay: 15s, 0s, 10s; transform: rotate(-30deg); }
+
+        .background-animation:nth-child(3)::before { top: 40%; left: 60%; animation-delay: 10s, 0s, 15s; }
+        .background-animation:nth-child(3)::after { top: 80%; left: 20%; animation-delay: 20s, 10s, 5s; transform: rotate(60deg); }
+
+        /* Keyframes for movement and fading */
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.15; }
+        }
+
+        @keyframes move-x {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(50px); }
+        }
+        @keyframes move-y {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(50px); }
+        }
+        @keyframes move-x-alt {
+            0%, 100% { transform: translateX(0px) rotate(45deg); }
+            50% { transform: translateX(-40px) rotate(45deg); }
+        }
+        @keyframes move-y-alt {
+            0%, 100% { transform: translateY(0px) rotate(45deg); }
+            50% { transform: translateY(-40px) rotate(45deg); }
+        }
+        /* End Background Chemical Bond Animation */
+
+        
+        /* Product Card Styles (Material Design) */
+        .product-card {
+            background-color: #24243e; /* Slightly lighter dark background for card lift */
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%; 
+        }
+        /* Hover effect: lift and show strong focus shadow */
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.8), 0 10px 10px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--color-secondary);
+        }
+
+        /* NEW VIDEO STYLES */
+        .card-video-top {
+            height: 250px; /* Maintain height */
+            object-fit: cover; /* Important for video filling the space without distortion */
+            width: 100%;
+            display: block;
+        }
+        /* END NEW VIDEO STYLES */
+        
+        .card-title {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        .card-text {
+            color: var(--color-text);
+        }
+
+        /* Icon Styling */
+        .service-icon {
+            font-size: 2rem;
+            color: var(--color-secondary);
+            margin-right: 15px;
+        }
+        .service-header {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #11111d;
+            border-top: 3px solid var(--color-secondary);
+        }
+
+
+        /* ======================================= */
+        /* --- MOBILE VIEW OPTIMIZATION (< 576px) -- */
+        /* ======================================= */
+        @media (max-width: 576px) {
+            
+            /* General Spacing */
+            .py-5 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+
+            /* Hero Section: Font Size and Padding Adjustment */
+            .hero-section {
+                padding: 60px 0 40px; 
+            }
+            .hero-title {
+                font-size: 2.5rem; /* Reduced for mobile impact */
+            }
+            .hero-section .lead {
+                font-size: 1rem;
+            }
+            .hero-section .btn-lg {
+                font-size: 1rem;
+                padding: 10px 30px !important;
+            }
+
+            /* Main Section Titles */
+            .display-5 {
+                font-size: 2rem !important;
+            }
+            .lead {
+                font-size: 0.95rem;
+            }
+
+            /* Product Cards - Optimization for Small Screens */
+            .product-card {
+                margin-bottom: 20px; /* Space between cards in single column */
+            }
+            .card-video-top { /* Mobile Video Height Adjustment */
+                height: 180px; 
+            }
+            .card-body {
+                padding: 1rem !important; /* Tighter padding */
+            }
+            .card-title {
+                font-size: 1.25rem; /* Clear and attractive title size */
+            }
+            .service-icon {
+                font-size: 1.5rem; /* Smaller icon size */
+            }
+            .card-text {
+                font-size: 0.85rem; /* Body text scaled down slightly for better fit */
+            }
+
+            /* Contact CTA Section */
+            .display-6 {
+                font-size: 1.5rem !important;
+            }
+            #contact .lead {
+                 font-size: 1rem;
+            }
+            #contact .btn-lg {
+                font-size: 0.9rem;
+                padding: 12px 30px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="#">
+                <!-- LOGO ICON: White -->
+                <i class="navbar-icon fas fa-camera-movie me-2"></i> Advertising
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-cta rounded-pill ms-lg-3 px-4 py-2" type="button">
+                            <i class="fas fa-feather-alt me-1"></i> Start Project
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <!-- Animated Background Elements -->
+        <div class="background-animation"></div>
+        <div class="background-animation"></div>
+        <div class="background-animation"></div>
+        
+        <div class="container">
+            <h1 class="hero-title mb-3 animate__animated animate__fadeInDown">
+              Shaping Advertising Brilliance
+            </h1>
+            <p class="lead text-white-75 mb-4">
+                Dashantee Studio transforms ideas into dynamic advertising campaigns. We create memorable brand experiences that engage and inspire across all media.
+            </p>
+            <a href="#services" class="btn btn-cta btn-lg rounded-pill px-5">
+                Explore Our Services
+            </a>
+        </div>
+    </header>
+
+    <!-- Services/Products Section -->
+    <section id="services" class="py-5 py-md-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-white">
+                    <span class="text-secondary">02.</span> Our Production Services
+                </h2>
+                <p class="lead text-white-50">Comprehensive support for every format and story.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                
+                <!-- Product 1: Feature Films -->
+                <div class="col-lg-6 col-md-10">
+                    <div class="card product-card">
+                        <!-- VIDEO HEADER START -->
+                        <video class="card-video-top" autoplay loop muted playsinline poster="https://placehold.co/800x250/301934/ffd166?text=Feature+Film+Video+Loading">
+                            <!-- !!! IMPORTANT: REPLACE src WITH YOUR ACTUAL VIDEO FILE !!! -->
+                            <source src="./img/TV Commercials.mp4" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- VIDEO HEADER END -->
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3 service-header d-flex align-items-center pb-2">
+                                <i class="service-icon fas fa-video"></i>TV Commercials
+                            </h5>
+                            <p class="card-text">
+                               We produce top-notch quality, engaging TV ads that capture viewers attention,
+                                build brand awareness, and drive sales. From concept to broadcast, we help you create 
+                                compelling stories. We showcase your products in greeting way, and reach your target 
+                                audience through effective television advertising
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: Short Films -->
+                <div class="col-lg-6 col-md-10">
+                    <div class="card product-card">
+                        <!-- VIDEO HEADER START -->
+                        <video class="card-video-top" autoplay loop muted playsinline poster="https://placehold.co/800x250/414a4c/e94560?text=Short+Film+Video+Loading">
+                            <!-- !!! IMPORTANT: REPLACE src WITH YOUR ACTUAL VIDEO FILE !!! -->
+                            <source src="./img/Online Video Ads.mp4" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- VIDEO HEADER END -->
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3 service-header d-flex align-items-center pb-2">
+                                <i class="service-icon fas fa-compact-disc"></i> Online Video Ads
+                            </h5>
+                            <p class="card-text">
+                               Our team produces and delivers max-impact video ads that engage viewers,
+                                communicate your message, and achieve your marketing objectives. We expertly
+                                 manage your video ad campaigns to maximize reach, views, and ROI.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: Documentaries -->
+                <div class="col-lg-6 col-md-10">
+                    <div class="card product-card">
+                        <!-- VIDEO HEADER START -->
+                        <video class="card-video-top" autoplay loop muted playsinline poster="https://placehold.co/800x250/1c1c1c/f4f4f4?text=Documentary+Video+Loading">
+                            <!-- !!! IMPORTANT: REPLACE src WITH YOUR ACTUAL VIDEO FILE !!! -->
+                            <source src="./img/Social Media Campaigns.mp4" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- VIDEO HEADER END -->
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3 service-header d-flex align-items-center pb-2">
+                                <i class="service-icon fas fa-book-reader"></i> Social Media Campaigns
+                            </h5>
+                            <p class="card-text">
+                               Our team crafts and implements effective social media campaigns that increase brand awareness,
+                                boost engagement, and drive website traffic and sales. We help you navigate the ever-changing
+                                 social media landscape and reach your target audience
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: Music Videos -->
+                <div class="col-lg-6 col-md-10">
+                    <div class="card product-card">
+                        <!-- VIDEO HEADER START -->
+                        <video class="card-video-top" autoplay loop muted playsinline poster="https://placehold.co/800x250/e94560/1a1a2e?text=Music+Video+Video+Loading">
+                            <!-- !!! IMPORTANT: REPLACE src WITH YOUR ACTUAL VIDEO FILE !!! -->
+                            <source src="./img/cop_video.mp4" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- VIDEO HEADER END -->
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3 service-header d-flex align-items-center pb-2">
+                                <i class="service-icon fas fa-headphones"></i> Corporate Videos
+                            </h5>
+                            <p class="card-text">
+                               Our team of creative professionals understands the importance of effective visual
+                                communication. We ll work closely with you to develop a customized video strategy 
+                                that aligns with your brand s unique needs and goals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 5: Music Videos -->
+                <div class="col-lg-6 col-md-10">
+                    <div class="card product-card">
+                        <!-- VIDEO HEADER START -->
+                        <video class="card-video-top" autoplay loop muted playsinline poster="https://placehold.co/800x250/e94560/1a1a2e?text=Music+Video+Video+Loading">
+                            <!-- !!! IMPORTANT: REPLACE src WITH YOUR ACTUAL VIDEO FILE !!! -->
+                            <source src="./img/Political campaigns.mp4" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- VIDEO HEADER END -->
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3 service-header d-flex align-items-center pb-2">
+                                <i class="service-icon fas fa-headphones"></i>Political campaigns
+                            </h5>
+                            <p class="card-text">
+                              Our team provides expert digital solutions for political candidates and organizations,
+                               including campaign strategy, social media management, online advertising, and voter engagement 
+                               to help you reach, persuade, and mobilize your audience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="py-5 bg-secondary text-center">
+        <div class="container">
+            <h3 class="display-6 fw-bold text-white mb-3">Ready to Start Your Production?</h3>
+            <p class="lead text-white-75 mb-4">
+                Partner with us to transform your story into a visual masterpiece.
+            </p>
+            <button class="btn btn-lg rounded-pill px-5 py-3 text-secondary" style="background-color: var(--color-accent); font-weight: 700;">
+                <i class="fas fa-paper-plane me-2"></i> Get a Quote Today
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer text-center py-4">
+        <div class="container">
+            <p class="text-white-50 mb-0 small">
+                © Dashantee 2025 - All rights reserved
+            </p>
+        </div>
+    </footer>
+
+    <!-- Load Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

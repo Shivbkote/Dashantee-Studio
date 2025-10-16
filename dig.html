@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infinite Diagonal Loop</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+
+    .loop-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200vw;
+      height: 200vh;
+      overflow: hidden;
+    }
+
+    .diagonal-strip {
+      display: flex;
+      flex-direction: column;
+      animation: scrollDiagonal 30s linear infinite;
+      will-change: transform;
+    }
+
+    .diagonal-strip img {
+      height: 100vh;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Duplicate image set for seamless loop */
+    .diagonal-strip img:nth-child(n+5) {
+      /* visually identical, but part of second set */
+    }
+
+    @keyframes scrollDiagonal {
+      0% {
+        transform: translate(0%, 0%);
+      }
+      100% {
+        transform: translate(-50%, 50%);
+      }
+    }
+
+    /* Mobile view */
+    @media (max-width: 768px) {
+      body {
+        background: #ffffff;
+      }
+
+      .loop-wrapper {
+        width: 200vw;
+        height: 1000px;
+      }
+
+      .diagonal-strip img {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loop-wrapper">
+    <div class="diagonal-strip">
+      <!-- First set -->
+      <img src="home_bg.svg" alt="Loop Image" />
+      <img src="home_bg.svg" alt="Loop Image" />
+      <img src="home_bg.svg" alt="Loop Image" />
+      <img src="home_bg.svg" alt="Loop Image" />
+      <!-- Duplicate set -->
+      <img src="home_bg.svg" alt="Loop Image" />
+      <img src="home_bg.svg" alt="Loop Image" />
+      <img src="home_bg.svg" alt="Loop Image" />
+      <img src="home_bg.svg" alt="Loop Image" />
+    </div>
+  </div>
+</body>
+</html>
