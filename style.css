@@ -1,4 +1,33 @@
-        /* Custom Variables */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.video-wrapper video {
+    width: 100%;
+    display: block;
+}
+
+.video-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* optional: black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+
+
+
+/* Custom Variables */
         :root {
             --dash-primary: #5A67D8; /* Indigo/Violet */
             --dash-dark: #1A202C; /* Dark grey */
@@ -1840,4 +1869,5 @@
                 padding: 0.5rem 1rem;
                 font-size: 0.95rem;
             }
+
         }
