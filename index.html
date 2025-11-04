@@ -272,6 +272,33 @@
         </div>
 
     </section>
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Find the video and the content container
+            const video = document.getElementById("heroVideo");
+            const content = document.querySelector(".hero-content");
+            
+            // This function will remove the 'loading' class, triggering the CSS animations
+            const showContent = () => {
+                if (content.classList.contains("loading")) {
+                    content.classList.remove("loading");
+                }
+            };
+
+            // Check if the video is already ready (e.g., cached)
+            // readyState 4 means 'HAVE_ENOUGH_DATA' to play
+            if (video.readyState >= 4) {
+                showContent();
+            } else {
+                // If not ready, wait for the 'canplaythrough' event
+                video.addEventListener("canplaythrough", showContent, { once: true });
+            }
+            
+            // As a safety fallback, if the event somehow fails
+            // (e.g., on a very slow connection), show the content after 4 seconds anyway.
+            setTimeout(showContent, 4000); 
+        });
+    </script>
 
     <!-- /end home section -->
 
@@ -1949,6 +1976,7 @@
 
 
 </html>
+
 
 
 
